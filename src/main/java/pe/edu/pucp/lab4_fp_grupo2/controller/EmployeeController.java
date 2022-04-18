@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +32,14 @@ public class EmployeeController {
     DepartmentsRepository departmentsRepository;
 
     @GetMapping(value = {"","/"})
-    public String listaEmployee(Model model){
-        model.addAttribute("listaEmployee", employeesRepository.findAll());
-        model.addAttribute("listaJobs", jobsRepository.findAll());
-        model.addAttribute("listaDepartments", departmentsRepository.findAll());
+    public String listaEmployee(@RequestParam(required=false,name="search") String search, Model model){
+        List<Employees> employees = new ArrayList<Employees>();
+        if( search == null || search.equals("")){
+            employees = employeesRepository.findAll();
+        }else{
+            employees = employeesRepository.listarEmpleadosNombreApellidoDepartamentoPuestoCiudad(search.toLowerCase());
+        }
+        model.addAttribute("listaEmployee", employees);
         return "employee/lista";
     }
 
@@ -114,14 +119,6 @@ public class EmployeeController {
             attr.addFlashAttribute("msg","Empleado borrado exitosamente");
         }
         return "redirect:/employee";
-
-    }
-
-    @PostMapping("/search")
-    public String buscar (@RequestParam("searchTxt") String searchTxt,Model model){
-        List<Employees> employees = employeesRepository.listarEmpleadosNombreApellidoDepartamentoPuestoCiudad(searchTxt);
-        model.addAttribute("listaEmployees",employees);
-        return "employee/lista";
     }
 
 }
