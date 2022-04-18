@@ -1,8 +1,11 @@
 package pe.edu.pucp.lab4_fp_grupo2.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 
 @Entity
@@ -13,6 +16,7 @@ public class Employees {
     @Column(name = "employee_id", nullable = false)
     private Integer id;
 
+    @NotBlank
     @Column(name = "first_name", length = 20)
     private String firstName;
 
@@ -23,13 +27,14 @@ public class Employees {
     private String email;
 
     @Column(name = "password", length = 65)
+    @Size(min = 8, message = "La contraseña debe tener como mínimo 8 caracteres")
     private String password;
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
     @Column(name = "hire_date", nullable = false)
-    private Instant hireDate;
+    private Date hireDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "job_id", nullable = false)
@@ -51,6 +56,8 @@ public class Employees {
 
     @Column(name = "enabled")
     private Integer enabled;
+
+
 
     public Integer getEnabled() {
         return enabled;
@@ -100,11 +107,11 @@ public class Employees {
         this.job = job;
     }
 
-    public Instant getHireDate() {
+    public Date getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Instant hireDate) {
+    public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
 
