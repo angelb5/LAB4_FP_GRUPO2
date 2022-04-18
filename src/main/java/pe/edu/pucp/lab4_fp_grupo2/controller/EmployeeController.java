@@ -116,10 +116,12 @@ public class EmployeeController {
         return "redirect:/employee";
 
     }
-/*
-    @PostMapping("/search")
-    public String buscar (){
 
+    @PostMapping("/search")
+    public String buscar (@RequestParam("searchTxt") String searchTxt,Model model){
+        List<Employees> employees = employeesRepository.listarEmpleadosNombreApellidoDepartamentoPuestoCiudad(searchTxt);
+        model.addAttribute("listaEmployees",employees);
+        return "employee/lista";
     }
-*/
+
 }
