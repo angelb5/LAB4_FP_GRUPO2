@@ -11,13 +11,26 @@
     <body>
         <div class="container">
         <h1>Empleados por Departamento</h1>
-            <table class="table">
+            <a class="btn btn-primary" th:href="@{'/'}">Regresar</a>
+            <table class="table">  <!-- COMPLETAR -->
                 <thead>
-                <!-- COMPLETAR -->
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Sueldo</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <!-- COMPLETAR -->
-                </tr>
+                    <tr th:each="employee : ${listaEmpDepart}">
+                        <td th:text="${employee.getEmployeeid()}"></td>
+                        <td th:text="${employee.getNombre()}"></td>
+                        <td th:text="${employee.getApellido()}"></td>
+                        <td th:text="${employee.getCargo()}"></td>
+                        <td th:text="${employee.getSueldo()}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/employee/editar' + '?id=' + ${employee.getEmployeeid()}}">Editar</a>
+                    </tr>
                 </tbody>
             </table>
         </div>

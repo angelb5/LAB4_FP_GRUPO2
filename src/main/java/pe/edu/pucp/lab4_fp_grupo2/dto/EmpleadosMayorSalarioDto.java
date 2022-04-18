@@ -4,10 +4,10 @@ import java.util.Date;
 
 public interface EmpleadosMayorSalarioDto {
 
-    String getnombre();
-    String getapellido();
-    Date getfechainicio();
-    Date getfechafin();
-    String getpuesto();
+    String getNombre();
+    String getApellido();
+    Date getFechainicio();
+    Date getFechafin();
+    String getPuesto();
 
 }

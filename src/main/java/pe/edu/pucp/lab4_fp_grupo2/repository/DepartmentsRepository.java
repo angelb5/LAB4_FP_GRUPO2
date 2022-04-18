@@ -25,6 +25,6 @@ public interface DepartmentsRepository extends JpaRepository<Departments,Integer
             "join jobs j on (e.job_id=j.job_id) \n" +
             "where e.department_id = ?1 \n" +
             "order by e.salary desc;" ,nativeQuery = true)
-    List<EmpleadosDepartamentoDto> listaEmpleadoDepartmento (int iddep);
+    List<EmpleadosDepartamentoDto> listaEmpleadoDepartmento (String iddep);
 
 }

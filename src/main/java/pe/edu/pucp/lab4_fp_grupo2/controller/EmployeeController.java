@@ -33,7 +33,7 @@ public class EmployeeController {
 
     @GetMapping(value = {"","/"})
     public String listaEmployee(@RequestParam(required=false,name="search") String search, Model model){
-        List<Employees> employees = new ArrayList<Employees>();
+        List<Employees> employees;
         if( search == null || search.equals("")){
             employees = employeesRepository.findAll();
         }else{
