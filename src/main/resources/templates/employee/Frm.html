@@ -35,7 +35,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="email" class="form-label">Correo electrónico</label>
-                                <input th:field="*{email}" type="email" class="form-control" name="email" id="email"
+                                <input th:field="*{email}" type="text" class="form-control" name="email" id="email"
                                        th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"/>
                                 <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
                                      th:errors="*{email}"></div>
@@ -51,8 +51,8 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="job" class="form-label">Cargo</label>
-                                <select class="form-select" name="manager" id="job">
-                                    <option th:each="job : ${listaJobs}"
+                                <select class="form-control" name="manager" id="job">
+                                    <option th:each="job : ${listaTrabajos}"
                                             th:selected="${employee.job != null and (job.jobid == employee.job.jobid)}"
                                             th:text="${job.jobtitle}"
                                             th:value="${job.jobid}"></option>
@@ -69,7 +69,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="manager" class="form-label">Jefe</label>
-                                <select class="form-select" name="manager" id="manager">
+                                <select class="form-control" name="manager" id="manager">
                                     <option th:each="jefe : ${listaJefes}"
                                             th:selected="${employee.manager != null and (jefe.id == employee.manager.id)}"
                                             th:text="|${jefe.firstName} ${jefe.lastName==null?'':jefe.lastName}|"
@@ -78,8 +78,8 @@
                             </div>
                             <div class="col">
                                 <label for="department" class="form-label">Departamento</label>
-                                <select class="form-select" name="department" id="department">
-                                    <option th:each="department : ${listaDepartments}"
+                                <select class="form-control" name="department" id="department">
+                                    <option th:each="department : ${listaDepartamentos}"
                                             th:selected="${employee.department != null and (department.id == employee.department.id)}"
                                             th:text="${department.departmentname}"
                                             th:value="${department.id}"></option>

@@ -44,12 +44,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String nuevoEmployeeForm(Model model) {
+    public String nuevoEmployeeForm(@ModelAttribute("employee") Employees employee, Model model) {
+
         model.addAttribute("listaJefes",getListaJefes());
         model.addAttribute("listaTrabajos",jobsRepository.findAll());
         model.addAttribute("listaDepartamentos",departmentsRepository.findAll());
         return "employee/Frm";
     }
+
     public List<Employees> getListaJefes() {
         List<Employees> listaJefes = employeesRepository.findAll();
         Employees e = new Employees();
@@ -61,30 +63,30 @@ public class EmployeeController {
 
 
     @PostMapping("/save")
-    public String guardarEmployee(@ModelAttribute("employees") @Valid Employees employees, BindingResult bindingResult,
+    public String guardarEmployee(@ModelAttribute("employee") @Valid Employees employee, BindingResult bindingResult,
                                   RedirectAttributes attr,
                                   @RequestParam(name="fechaContrato", required=false) String fechaContrato, Model model) {
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("listaJobs", jobsRepository.findAll());
+            model.addAttribute("listaTrabajos", jobsRepository.findAll());
             model.addAttribute("listaJefes", employeesRepository.findAll());
-            model.addAttribute("listaDepartments", departmentsRepository.findAll());
+            model.addAttribute("listaDepartamentos", departmentsRepository.findAll());
             return "employee/Frm";
         }else {
-            if (employees.getId() == 0) {
+            if (employee.getId() == 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
-                employees.setHireDate(new Date());
-                employeesRepository.save(employees);
+                employee.setHireDate(new Date());
+                employeesRepository.save(employee);
                 return "redirect:/employee";
             } else {
 
                 try {
-                    employees.setHireDate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
+                    employee.setHireDate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                employeesRepository.save(employees);
+                employeesRepository.save(employee);
                 attr.addFlashAttribute("msg", "Empleado actualizado exitosamente");
                 return "redirect:/employee";
             }
@@ -92,17 +94,16 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit")
-    public String editarEmployee(@ModelAttribute("employees") @Valid Employees employees,
-                                 Model model,
+    public String editarEmployee(Model model,
                                  @RequestParam("id") int id) {
         Optional<Employees> optionalEmployees = employeesRepository.findById(id);
         if(optionalEmployees.isPresent()){
-            employees = optionalEmployees.get();
-            model.addAttribute("employees",employees);
+            Employees employee = optionalEmployees.get();
+            model.addAttribute("employee",employee);
             model.addAttribute("listaJefes",getListaJefes());
             model.addAttribute("listaTrabajos",jobsRepository.findAll());
             model.addAttribute("listaDepartamentos",departmentsRepository.findAll());
-            return "employee/editForm";
+            return "employee/Frm";
         }
         return "redirect:/employee";
     }
