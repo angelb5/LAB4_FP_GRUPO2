@@ -1,8 +1,8 @@
-package com.example.laboratorio4.controller;
-import com.example.laboratorio4.entity.Employees;
-import com.example.laboratorio4.repository.DepartmentsRepository;
-import com.example.laboratorio4.repository.EmployeesRepository;
-import com.example.laboratorio4.repository.JobsRepository;
+package pe.edu.pucp.lab4_fp_grupo2.controller;
+import pe.edu.pucp.lab4_fp_grupo2.entity.Employees;
+import pe.edu.pucp.lab4_fp_grupo2.repository.DepartmentsRepository;
+import pe.edu.pucp.lab4_fp_grupo2.repository.EmployeesRepository;
+import pe.edu.pucp.lab4_fp_grupo2.repository.JobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

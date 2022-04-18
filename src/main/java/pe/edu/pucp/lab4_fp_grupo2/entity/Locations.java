@@ -1,4 +1,4 @@
-package com.example.laboratorio4.entity;
+package pe.edu.pucp.lab4_fp_grupo2.entity;
 
 import javax.persistence.*;
 

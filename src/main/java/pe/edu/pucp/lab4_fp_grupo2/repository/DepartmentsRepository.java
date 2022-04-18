@@ -1,6 +1,6 @@
-package com.example.laboratorio4.repository;
+package pe.edu.pucp.lab4_fp_grupo2.repository;
 
-import com.example.laboratorio4.entity.Departments;
+import pe.edu.pucp.lab4_fp_grupo2.entity.Departments;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

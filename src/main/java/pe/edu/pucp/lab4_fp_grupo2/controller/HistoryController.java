@@ -1,4 +1,4 @@
-package com.example.laboratorio4.controller;
+package pe.edu.pucp.lab4_fp_grupo2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
