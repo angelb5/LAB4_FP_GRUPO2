@@ -19,17 +19,25 @@ public class Employees {
     private int id;
 
     @NotBlank(message = "Este campo no debe estar vacio.")
-    @Column(name = "first_name", length = 20)
+    @Size(max=25)
+    @Column(name = "first_name")
     private String firstName;
+
     @NotBlank(message = "Este campo no debe estar vacio.")
-    @Column(name = "last_name", nullable = false, length = 25)
+    @Size(max=25)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Email
     @NotBlank(message = "Este campo no debe estar vacio.")
-    @Column(name = "email", nullable = false, length = 25)
+    @Size(max = 25)
+    @Column(name = "email", nullable = false)
     private String email;
+
     @NotBlank(message = "Este campo no debe estar vacio.")
-    @Column(name = "password", length = 65)
+    @Column(name = "password")
     @Size(min = 8, message = "La contraseña debe tener como mínimo 8 caracteres.")
+    @Size(max = 65,message = "La contraseña puede tener como máximo 65 caracteres.")
     private String password;
 
     @Column(name = "phone_number", length = 20)
