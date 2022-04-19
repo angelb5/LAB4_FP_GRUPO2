@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
@@ -20,18 +19,18 @@ public class Employees {
     @Column(name = "employee_id", nullable = false)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Este campo no debe estar vacio.")
     @Column(name = "first_name", length = 20)
     private String firstName;
-
+    @NotBlank(message = "Este campo no debe estar vacio.")
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
-
+    @NotBlank(message = "Este campo no debe estar vacio.")
     @Column(name = "email", nullable = false, length = 25)
     private String email;
-
+    @NotBlank(message = "Este campo no debe estar vacio.")
     @Column(name = "password", length = 65)
-    @Size(min = 8, message = "La contraseña debe tener como mínimo 8 caracteres")
+    @Size(min = 8, message = "La contraseña debe tener como mínimo 8 caracteres.")
     private String password;
 
     @Column(name = "phone_number", length = 20)
@@ -44,6 +43,7 @@ public class Employees {
     @JoinColumn(name = "job_id", nullable = false)
     private Jobs job;
 
+    @Min(value = 1,message = "El salario debe ser mayor a 0.")
     @Column(name = "salary", precision = 8, scale = 2)
     private BigDecimal salary;
 
