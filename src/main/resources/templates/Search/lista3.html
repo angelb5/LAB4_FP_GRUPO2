@@ -29,7 +29,7 @@
                         <td th:text="${employee.getApellido()}"></td>
                         <td th:text="${employee.getCargo()}"></td>
                         <td th:text="${employee.getSueldo()}"></td>
-                        <td><a class="btn btn-primary" th:href="@{'/employee/editar' + '?id=' + ${employee.getEmployeeid()}}">Editar</a>
+                        <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.getEmployeeid()}}">Editar</a>
                     </tr>
                 </tbody>
             </table>

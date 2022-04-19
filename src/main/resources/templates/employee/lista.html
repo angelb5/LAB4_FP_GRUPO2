@@ -13,6 +13,8 @@
         <h1>Lista de Empleados</h1>
         <a class="btn btn-primary mt-4 mb-4" th:href="@{/employee/new}">Nuevo Empleado</a>  <!-- COMPLETAR -->
         <!-- COMPLETAR -->
+        <div th:if="${msg2!=null}" class="alert alert-warning" th:text="${msg2}"></div>
+        <div th:class="'alert ' + ${accion}" th:text="${msg}" th:if="${msg != null && accion != null}"></div>
         <form class="form-group mb-3" th:action="@{/employee}">
             <div class="input-group-append">
                 <input class="form-control mr-2" placeholder="Texto a buscar" name="search" th:value="${param.search}">

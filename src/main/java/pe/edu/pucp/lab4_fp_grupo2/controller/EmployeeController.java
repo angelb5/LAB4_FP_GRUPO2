@@ -73,6 +73,7 @@ public class EmployeeController {
             return "employee/Frm";
         }else {
             if (employee.getId() == 0) {
+                attr.addFlashAttribute("accion","alert-success");
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
                 employee.setHireDate(new Date());
                 employeesRepository.save(employee);
@@ -83,6 +84,7 @@ public class EmployeeController {
                 employee.setHireDate(employeeDB.getHireDate());
 
                 employeesRepository.save(employee);
+                attr.addFlashAttribute("accion","alert-warning");
                 attr.addFlashAttribute("msg", "Empleado actualizado exitosamente");
                 return "redirect:/employee";
             }
@@ -113,6 +115,7 @@ public class EmployeeController {
 
         if (optEmployees.isPresent()) {
             employeesRepository.deleteById(id);
+            attr.addFlashAttribute("accion","alert-danger");
             attr.addFlashAttribute("msg","Empleado borrado exitosamente");
         }
         return "redirect:/employee";
