@@ -23,5 +23,7 @@ public interface EmployeesRepository extends JpaRepository<Employees,Integer> {
             "order by e.salary desc;")
     List<EmpleadosMayorSalarioDto> listarEmpleadosMayorSalario();
 
+    List<Employees> findByEmail(String email);
+
 
 }

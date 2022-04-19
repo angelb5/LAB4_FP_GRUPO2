@@ -1,4 +1,6 @@
 package pe.edu.pucp.lab4_fp_grupo2.controller;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import pe.edu.pucp.lab4_fp_grupo2.entity.Employees;
 import pe.edu.pucp.lab4_fp_grupo2.repository.DepartmentsRepository;
 import pe.edu.pucp.lab4_fp_grupo2.repository.EmployeesRepository;
@@ -73,11 +75,17 @@ public class EmployeeController {
             return "employee/Frm";
         }else {
             if (employee.getId() == 0) {
-                attr.addFlashAttribute("accion","alert-success");
-                attr.addFlashAttribute("msg", "Empleado creado exitosamente");
-                employee.setHireDate(new Date());
-                employeesRepository.save(employee);
-                return "redirect:/employee";
+                if(employeesRepository.findByEmail((employee.getEmail())).size()==0){
+                    attr.addFlashAttribute("accion","alert-success");
+                    attr.addFlashAttribute("msg", "Empleado creado exitosamente");
+                    employee.setHireDate(new Date());
+                    employeesRepository.save(employee);
+                    return "redirect:/employee";
+                }else{
+                    FieldError error = new FieldError("email", "email", "Ya existe un usuario con este correo");
+                    bindingResult.addError(error);
+                    return "employee/Frm";
+                }
             } else {
                 Employees employeeDB = employeesRepository.getById(employee.getId());
 
